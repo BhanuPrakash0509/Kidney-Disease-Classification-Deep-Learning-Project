@@ -1,8 +1,8 @@
 import os
 from box import ConfigBox
-from box import BoxValueError
+from box import BoxError
 import yaml
-from cnnClassifier import logger
+from src.cnnClassifier import logger
 import json
 import joblib
 from ensure import ensure_annotations
@@ -31,7 +31,7 @@ def read_yaml(path_to_yaml: Path) -> ConfigBox:
             content = yaml.safe_load(yaml_file)
             logger.info(f"yaml file: {path_to_yaml} loaded successfully")
             return ConfigBox(content)
-    except BoxValueError:
+    except BoxError:
         raise ValueError("yaml file is empty")
     except Exception as e:
         raise e
